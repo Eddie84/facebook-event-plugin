@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="system" method="upgrade">
+	<name>System - SB - Facebook Events Plugin PRO</name>
+	<author>Serafino Bilotta</author>
+	<creationDate>2014</creationDate>
+	<copyright>(C) 2014 Serafino Bilotta</copyright>
+	<license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+	<authorEmail>serafinobilotta@hotmail.com</authorEmail>
+	<authorUrl>http://www.p2warticles.com/2014/09/facebook-events-plugin-pro/</authorUrl>
+	<version>1.0</version>
+	<description>PLUGIN_FB_EVENTS_DESCRIPTION</description>
+	<files>
+		<filename plugin="fbevents_pro">fbevents_pro.php</filename>
+		<filename plugin="fbevents_pro">request_attendant.php</filename>
+		<filename>index.html</filename>
+		<folder plugin="fbevents_pro">css</folder>
+		<folder plugin="fbevents_pro">sdk</folder>
+		<folder plugin="fbevents_pro">js</folder>
+		<folder plugin="fbevents_pro">models</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB.plg_system_fbevents_pro.ini</language>
+		<language tag="en-GB">language/en-GB.plg_system_fbevents_pro.sys.ini</language>
+		<language tag="it-IT">language/it-IT.plg_system_fbevents_pro.ini</language>
+		<language tag="it-IT">language/it-IT.plg_system_fbevents_pro.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params" addfieldpath="/plugins/system/fbevents_pro/models/fields">
+			<fieldset name="basic">
+				<field type="jqueryui" class="hidden" />
+
+				<!-- Impostazioni generali
+				=====================================================================================================-->
+				<field name="appId" type="text" size="20" default="XXX342993654321" label="AppId"
+				       description="FBEVENTS_APPID_D"/>
+				<field name="secret" type="text" size="40" default="XXXd0267658ecac083a0e96ed6f5aXXX" label="Secret Key"
+				       description="FBEVENTS_SECRET_D"/>
+				<field name="fbUserName" type="text" size="20" default="133040850089653" label="FBEVENTS_IDFBPAGE_L"
+				       description="FBEVENTS_IDFBPAGE_D"/>
+				<field name="showEvents" type="list" default="all" label="FBEVENTS_SHOWEVENTS_L"
+				       description="FBEVENTS_SHOWEVENTS_D">
+                    <option value="all">FBEVENTS_ALL</option>
+                    <option value="new">FBEVENTS_NEW</option>
+					<option value="past">Past</option>
+				</field>
+				<field name="limitEvents" type="text" size="3" default="5" label="FBEVENTS_LIMITEVENTS_L"
+				       description="FBEVENTS_LIMITEVENTS_D"/>
+				<field name="orderEvents" type="list" default="desc" label="JFIELD_ORDERING_LABEL"
+				       description="JFIELD_ORDERING_DESC">
+					<option value="desc">Descending</option>
+					<option value="asc">Ascending</option>
+				</field>
+                <field name="enableMicrodata" type="list" default="false" label="FBEVENTS_MICRODATA_L"
+                       description="FBEVENTS_MICRODATA_D">
+                    <option value="false">Disabled</option>
+                    <option value="all">FBEVENTS_ALL</option>
+                    <option value="new">FBEVENTS_NEW</option>
+                </field>
+            </fieldset>
+
+
+            <fieldset name="advanced">
+
+				<!-- Impostazioni posizione e campi attivati
+				=====================================================================================================-->
+                <field name="showFields" default="no" label="FBEVENTS_SHOWFIELDS_L" type="checkboxes"
+				       description="FBEVENTS_SHOWFIELDS_D">
+					<option value="title">Title</option>
+					<option value="image">Image</option>
+					<option value="date">Date</option>
+					<option value="description">Description</option>
+					<option value="ticket_uri">Ticket Url</option>
+                    <option value="venue">Venue</option>
+					<option value="rsvp">Rsvp Buttons</option>
+					<option value="link">Link</option>
+					<option value="update_time">Update Time</option>
+					<option value="attendants">Attendants</option>
+				</field>
+				<field name="positions" type="text" label="Positions" default="" size="50" description="" class="hidden"/>
+
+
+				<!-- Impostazioni Titolo
+				=====================================================================================================-->
+                <field type="accordionstart" label="Title" data-id="title" />
+                <field name="linkedTitle" type="checkbox" default="false" value="true"
+				       label="JGLOBAL_LINKED_TITLES_LABEL" description="JGLOBAL_LINKED_TITLES_DESC"/>
+				<field name="titleTag" type="list" default="h1" label="FBEVENTS_TITLE_TAG_L"
+				       description="FBEVENTS_TITLE_TAG_L">
+					<option value="h1">h1</option>
+					<option value="h2">h2</option>
+					<option value="h3">h3</option>
+					<option value="h4">h4</option>
+					<option value="h5">h5</option>
+					<option value="h6">h6</option>
+					<option value="p">p</option>
+					<option value="div">div</option>
+				</field>
+				<field name="titleClass" type="text" size="20" label="FBEVENTS_TITLE_CLASS_L"
+				       description="FBEVENTS_CLASS_D"/>
+                <field type="accordionend" />
+
+				<!-- Impostazioni Immagine
+				=====================================================================================================-->
+                <field type="accordionstart" label="Picture" data-id="picture" />
+				<field name="pic" type="list" label="FBEVENTS_PIC_L" default="pic"
+				       description="FBEVENTS_PIC_D">
+					<option value="cover">cover</option>
+					<option value="small">small</option>
+					<option value="normal">normal</option>
+					<option value="large">large</option>
+					<option value="square">square</option>
+				</field>
+				<field name="picClass" type="text" size="20" label="FBEVENTS_PIC_CLASS_L"
+				       description="FBEVENTS_CLASS_D"/>
+				<field name="coverSetting" type="radio" default="cover" label="FBEVENTS_COVERSETTING_L"
+				       description="FBEVENTS_COVERSETTING_D" class="btn-group">
+					<option value="cover">FBEVENTS_COVER_OPTION_COVER</option>
+					<option value="full">FBEVENTS_COVER_OPTION_FULL</option>
+				</field>
+                <field type="accordionend" />
+
+				<!-- Impostazioni Date
+				=====================================================================================================-->
+                <field type="accordionstart" label="Date" data-id="date" />
+				<field name="dateLang" type="text" default="" size="5" label="FBEVENTS_DATELANG_L"
+				       description="FBEVENTS_DATELANG_D" filter="raw"/>
+				<field name="timeSeparator" type="text" default="" size="30" label="FBEVENTS_TIMESEPARATOR_L"
+				       description="FBEVENTS_TIMESEPARATOR_D" filter="raw"/>
+				<field name="toText" type="text" default="until" size="5" label="FBEVENTS_TOTEXT"
+				       description="FBEVENTS_TOTEXT"/>
+				<field name="lastUpdateText" type="text" default="Last update: " size="15" label="FBEVENTS_LASTUPDATETEXT_L"
+				       description="FBEVENTS_LASTUPDATETEXT_D"/>
+				<field name="dateClass" type="text" size="20" label="FBEVENTS_DATE_CLASS_L"
+				       description="FBEVENTS_CLASS_D"/>
+				<field name="updateTimeClass" type="text" size="20" label="FBEVENTS_UPDATETIME_CLASS_L"
+				       description="FBEVENTS_CLASS_D"/>
+				<field name="fullDateFormat" type="text" size="30" default="%A, %B %d, %Y %I:%M %p"
+				       label="FBEVENTS_FULLDATEFORMAT_L" description="FBEVENTS_FULLDATEFORMAT_D"/>
+				<field name="dateFormat" type="text" size="30" default="%A, %B %d, %Y" label="FBEVENTS_DATEFORMAT_L"
+				       description="FBEVENTS_DATEFORMAT_D"/>
+				<field name="timeFormat" type="text" size="8" default="%H:%M" label="FBEVENTS_TIMEFORMAT_L"
+				       description="FBEVENTS_TIMEFORMAT_D"/>
+				<field name="dateFormatUpdate" type="text" size="30" default="%A, %B %d, %Y"
+				       label="FBEVENTS_DATEFORMATUPDATE_L" description="FBEVENTS_DATEFORMATUPDATE_D"/>
+                <field type="accordionend" />
+
+				<!-- Impostazioni Descrizione
+				=====================================================================================================-->
+                <field type="accordionstart" label="Description" data-id="descr" />
+				<field name="descriptionClass" type="text" size="20" label="FBEVENTS_DESCRIPTION_CLASS_L"
+				       description="FBEVENTS_CLASS_D"/>
+				<field name="descriptionLimit" type="text" size="3" label="FBEVENTS_DESCRIPTION_LIMIT_L"
+				       description="FBEVENTS_DESCRIPTION_LIMIT_D"/>
+                <field type="accordionend" />
+
+
+				<!-- Impostazioni TicketUrl
+				=====================================================================================================-->
+                <field type="accordionstart" label="Ticket" data-id="ticket" />
+				<field name="ticketText" type="text" size="20" label="FBEVENTS_TICKETTEXT_L"
+				       description="FBEVENTS_TICKETTEXT_D"/>
+				<field name="ticketDivClass" type="text" size="20" label="FBEVENTS_TICKETDIVCLASS_L"
+				       description="FBEVENTS_CLASS_D"/>
+				<field name="ticketLinkClass" type="text" size="20" label="FBEVENTS_TICKETLINKCLASS_L"
+				       description="FBEVENTS_CLASS_D"/>
+                <field type="accordionend" />
+
+
+				<!-- Impostazioni Location
+				=====================================================================================================-->
+                <field type="accordionstart" label="Location" data-id="location" />
+				<field name="locationText" type="text" default="Location: " size="15" label="FBEVENTS_LOCATIONTEXT_L"
+				       description="FBEVENTS_LOCATIONTEXT_D"/>
+				<field name="locationClass" type="text" size="20" label="FBEVENTS_LOCATION_CLASS_L"
+				       description="FBEVENTS_CLASS_D"/>
+                <field type="accordionend" />
+
+
+				<!-- Impostazioni RSVP
+				=====================================================================================================-->
+                <field type="accordionstart" label="RSVP" data-id="rsvp" />
+				<field name="rsvpClass" type="text" size="20" label="FBEVENTS_RSVPCLASS_L"
+				       description="FBEVENTS_CLASS_D"/>
+				<field type="radio" name="btnAttend" default="true" description="FBEVENTS_BTN_D"
+				       label="FBEVENTS_BTNATTEND_L" class="btn-group">
+					<option value="true">JYES</option>
+					<option value="false">JNO</option>
+				</field>
+				<field type="radio" name="btnUnsure" default="true" description="FBEVENTS_BTN_D"
+				       label="FBEVENTS_BTNUNSURE_L" class="btn-group">
+					<option value="true">JYES</option>
+					<option value="false">JNO</option>
+				</field>
+				<field type="radio" name="btnDeclined" default="false" description="FBEVENTS_BTN_D"
+				       label="FBEVENTS_BTNDECLINED_L" class="btn-group">
+					<option value="true">JYES</option>
+					<option value="false">JNO</option>
+				</field>
+				<field type="text" name="btnTextAttend" default="Join" label="FBEVENTS_BTNTEXTATTEND_L"
+				       description="FBEVENTS_BTNTEXT_D"/>
+				<field type="text" name="btnTextUnsure" default="Maybe" label="FBEVENTS_BTNTEXTUNSURE_L"
+				       description="FBEVENTS_BTNTEXT_D"/>
+				<field type="text" name="btnTextDeclined" default="Decline" label="FBEVENTS_BTNTEXTDECLINED_L"
+				       description="FBEVENTS_BTNTEXT_D"/>
+				<field type="text" name="btnClassAttend" default="btn-success" label="FBEVENTS_BTNCLASSATTEND_L"
+				       description="FBEVENTS_CLASS_D"/>
+				<field type="text" name="btnClassUnsure" default="btn-info" label="FBEVENTS_BTNCLASSUNSURE_L"
+				       description="FBEVENTS_CLASS_D"/>
+				<field type="text" name="btnClassDeclined" default="btn-danger" label="FBEVENTS_BTNCLASSDECLINED_L"
+				       description="FBEVENTS_CLASS_D"/>
+                <field type="accordionend" />
+
+
+				<!-- Impostazioni Link
+				=====================================================================================================-->
+                <field type="accordionstart" label="Links" data-id="links" />
+				<field name="linkText" type="text" default="Link: " size="15" label="FBEVENTS_LINKTEXT"
+				       description="FBEVENTS_LINKTEXT"/>
+				<field name="linkClass" type="text" size="20" label="FBEVENTS_LINK_CLASS_L"
+				       description="FBEVENTS_CLASS_D"/>
+                <field type="accordionend" />
+
+
+				<!-- Impostazioni Lista Utenti
+				=====================================================================================================-->
+                <field type="accordionstart" label="Users" data-id="users" />
+				<field name="loadingImg" type="text"
+				       default="http://cdnjs.cloudflare.com/ajax/libs/file-uploader/3.7.0/processing.gif"
+				       label="FBEVENTS_LOADING_IMG_L" description="FBEVENTS_LOADING_IMG_D"/>
+				<field name="limitUser" type="text" default="10" size="2" label="FBEVENTS_LIMIT_USER_L"
+				       description="FBEVENTS_LIMIT_USER_D"/>
+                <field name="attendantStatus" type="list" label="FBEVENTS_ATTENDANTSTATUS_L" default="pic"
+                       description="FBEVENTS_ATTENDANTSTATUS_D">
+                    <option value="attending">attending</option>
+                    <option value="invited">invited</option>
+                </field>
+				<field name="linkedUser" type="checkbox" default="false" value="true"
+				       label="FBEVENTS_LINKED_USER_L" description="FBEVENTS_LINKED_USER_D"/>
+                <field type="accordionend" />
+
+			</fieldset>
+		</fields>
+	</config>
+</extension>
