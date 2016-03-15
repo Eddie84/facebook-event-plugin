@@ -1,6 +1,6 @@
 ## Installation
 
-If you're reading this, it means you've successfully unzipped the download zip from CodeCanyon.  At the root folder of this zip, you'll find several other folders and files.  The zip that can be installed will be located here, and is named fbevents.zip. Once you've located this zip file, you're ready to upload it to your Joomla extensions page and install the plugin.
+Once you've downloaded the zip file from github, you're ready to upload it to your Joomla extensions page and install the plugin.
 
 First, visit the Upload Package File tab from your *Joomla Extension Manager*, and select the **Upload & Install** button shown in the screenshot below:
 
